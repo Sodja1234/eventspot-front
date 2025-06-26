@@ -14,31 +14,94 @@
       <h1 class="mt-4 text-2xl font-bold text-black"> {{ username }}</h1>
       <p class="text-gray-500"> {{ email }}</p>
       <!-- Description -->
-      <p class="mt-2 text-center text-gray-100 text-sm max-w-xs">
+      <p class="mt-2 text-center text-black dark:text-gray-100 text-sm max-w-xs">
         Membre depuis {{ joinDate }}
       </p>
-      <!-- Stats -->
-      <div class="mt-6 flex justify-center space-x-12 w-full">
-        <div class="flex flex-col items-center">
-          <span class="text-xl font-semibold text-black">21</span>
-          <span class="text-white text-sm">Shots</span>
-        </div>
-        <div class="flex flex-col items-center">
-          <span class="text-xl font-semibold text-black">238</span>
-          <span class="text-white text-sm">Followers</span>
-        </div>
-        <div class="flex flex-col items-center">
-          <span class="text-xl font-semibold text-black">101</span>
-          <span class="text-white text-sm">Following</span>
-        </div>
-      </div>
       <!-- Boutons -->
       <div class="mt-6 flex space-x-4">
-        <button class="text-white px-6 py-2 rounded-md font-medium bg-purple-600 hover:bg-teal-500 transition">Follow</button>
+        <button class="text-white px-6 py-2 rounded-md font-medium bg-purple-600 hover:bg-teal-500 transition">Setting</button>
         <button class="text-white px-6 py-2 rounded-md font-medium bg-purple-600 hover:bg-teal-500 transition">Notification</button>
       </div>
     </div>
+    <div class="w-full mx-auto py-12">
+      <h2 class="text-3xl font-bold text-center mb-8">Votre Espace</h2>
+      <div class="space-y-4">
+        <div class="border-b">
+          <button class="w-[95%] mx-auto flex justify-between items-center py-4 text-gray-900 font-medium">
+            Vos centre d'intérêts
 
+          </button>
+          <div class="grid grid-rows grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mx-auto gap-4 p-4 justify-items-center">
+            @for(interet of interets; track interet.id){
+            <button class="text-white px-3 py-2 rounded-md font-medium bg-teal-500 hover:bg-teal-500 transition">
+              {{ interet.nom }}
+            </button>
+            }
+          </div>
+        </div>
+        <div (click)="toogleFavorite()" class="border-b pb-3">
+          <button class="w-[95%] mx-auto flex justify-between items-center py-4 text-gray-900 font-medium">
+            Vos événements favoris
+            <svg *ngIf="!isFavorite" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+              height="24" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd"
+                d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4.243a1 1 0 1 0-2 0V11H7.757a1 1 0 1 0 0 2H11v3.243a1 1 0 1 0 2 0V13h3.243a1 1 0 1 0 0-2H13V7.757Z"
+                clip-rule="evenodd" />
+            </svg>
+            <svg *ngIf="isFavorite" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+              width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd"
+                d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm5.757-1a1 1 0 1 0 0 2h8.486a1 1 0 1 0 0-2H7.757Z"
+                clip-rule="evenodd" />
+            </svg>
+          </button>
+          <div *ngIf="isFavorite" class="grid grid-rows grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mx-auto gap-4 p-4">
+            <app-event-card [event]="event" *ngFor="let event of eventFavorites" class="w-full mx-auto"></app-event-card>
+          </div>
+        </div>
+        <div (click)="toogleInterets()" class="border-b pb-3">
+          <button class="w-[95%] mx-auto flex justify-between items-center py-4 text-gray-900 font-medium">
+            Trouvez des événements liés à vs centres d'intétets
+            <svg *ngIf="!isInterest" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd"
+                d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4.243a1 1 0 1 0-2 0V11H7.757a1 1 0 1 0 0 2H11v3.243a1 1 0 1 0 2 0V13h3.243a1 1 0 1 0 0-2H13V7.757Z"
+                clip-rule="evenodd" />
+            </svg>
+            <svg *ngIf="isInterest" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd"
+                d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm5.757-1a1 1 0 1 0 0 2h8.486a1 1 0 1 0 0-2H7.757Z"
+                clip-rule="evenodd" />
+            </svg>
+          </button>
+          <div *ngIf="isInterest" class="grid grid-rows grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mx-auto gap-4 p-4">
+            <app-event-card [event]="event" *ngFor="let event of eventInterets" class="w-full mx-auto"></app-event-card>
+          </div>
+        </div>
+        <div class="border-b pb-3">
+          <button class="w-[95%] mx-auto flex justify-between items-center py-4 text-gray-900 font-medium">
+            What are the differences between Flowbite and Tailwind UI?
+            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+              height="24" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd"
+                d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4.243a1 1 0 1 0-2 0V11H7.757a1 1 0 1 0 0 2H11v3.243a1 1 0 1 0 2 0V13h3.243a1 1 0 1 0 0-2H13V7.757Z"
+                clip-rule="evenodd" />
+            </svg>
+          </button>
+        </div>
+        <div class="border-b pb-3">
+          <button class="w-[95%] mx-auto flex justify-between items-center py-4 text-gray-900 font-medium">
+            What about browser support?
+            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+              height="24" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd"
+                d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4.243a1 1 0 1 0-2 0V11H7.757a1 1 0 1 0 0 2H11v3.243a1 1 0 1 0 2 0V13h3.243a1 1 0 1 0 0-2H13V7.757Z"
+                clip-rule="evenodd" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-
