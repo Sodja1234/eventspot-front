@@ -18,7 +18,10 @@ export class EventService {
   constructor(private http: HttpClient, private userService: UserService) { }
 
   createEvent(data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/evenements`, data);
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.userService.getToken()}`,
+    })
+    return this.http.post(`${this.apiUrl}/evenements`, data,{headers} );
   }
 
   getCategories(url?: string, all?: boolean): Observable<Response<Category>> {

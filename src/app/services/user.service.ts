@@ -15,8 +15,9 @@ export class UserService {
   private apiUrl = environment.apiUrl;
   private isLoggedInSubject = new BehaviorSubject<boolean>(this.hasToken());
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
-  private token = ""; 
-  
+  private token = "";
+  private role = "";
+
 
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -37,12 +38,13 @@ export class UserService {
       console.log(' Réponse reçue du serveur :', response);
       const token = response.data.token;
       this.token = token;
+      this.role = response.data.role;
 
       this.saveUserSession(token, response.data);
 
 console.log('Token sauvegardé dans le localStorage :', localStorage.getItem('access_token'));
 
-       
+
        this.isLoggedInSubject.next(true);
 
       return response;
@@ -77,9 +79,7 @@ console.log('Token sauvegardé dans le localStorage :', localStorage.getItem('ac
 
   logout(): void {
     this.token = '';
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('current_user');
-    localStorage.removeItem('name');
+    localStorage.clear();
 
     this.isLoggedInSubject.next(false);
     this.router.navigate(['/login']);
