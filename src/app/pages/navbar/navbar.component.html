@@ -84,10 +84,6 @@
       <a *ngIf="!isLoggedIn" [routerLink]="['/login']"
         class="text-white font-bold-lg text-sm bg-purple-600 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg ml-2 px-2 py-1 text-center dark:bg-purple-600 dark:hover:bg-teal-600 dark:focus:ring-purple-600">
         Get Started </a>
-      <a *ngIf="!asPublic" [routerLink]="['/event/create']"
-        class="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
-        Create Event
-      </a>
       <a *ngIf="isLoggedIn" [routerLink]="['/profile']"
         class="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 text-purple-600 hover:text-teal-500 transition flex justify-between">
         <strong class="text-sm">{{ userName }}</strong>

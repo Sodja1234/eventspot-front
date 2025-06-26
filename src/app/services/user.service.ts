@@ -4,21 +4,22 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, firstValueFrom, Observable } from 'rxjs';
 import { Interet } from '../models/interet';
 import { UserSearch } from '../models/user';
+import { Router } from '@angular/router';
+import { environment } from '../../environnement/environnement';
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
- private apiUrl = 'http://localhost:8000/api';
-  //private apiUrl = 'http://10.252.252.50:8000/api'; // URL de l'API backend
+  private apiUrl = environment.apiUrl;
   private isLoggedInSubject = new BehaviorSubject<boolean>(this.hasToken());
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
   private token = ""; 
   
 
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   getInterets() {
   return this.http.get<Interet[]>(`${this.apiUrl}/interet`);
@@ -81,6 +82,7 @@ console.log('Token sauvegardé dans le localStorage :', localStorage.getItem('ac
     localStorage.removeItem('name');
 
     this.isLoggedInSubject.next(false);
+    this.router.navigate(['/login']);
   }
 
 

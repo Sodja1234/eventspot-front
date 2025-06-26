@@ -91,6 +91,16 @@ export const routes: Routes = [
         title: 'Dashboard Statistiques - EventSpot',
         loadComponent: () => import('../app/pages/dashboard/composants/stat/stat/stat.component').then((m) => m.StatComponent)
       },
+      {
+    path: 'event/create',
+    title: 'Create Event - EventSpot',
+    loadComponent: () => import('../app/pages/create-event/create-event.component').then((m) => m.CreateEventComponent)
+    },
+     {
+    path: 'event/:id',
+    title : 'Detail - EventSpot',
+    loadComponent : () => import('../app/pages/event-details/event-details.component').then((m)=> m.EventDetailsComponent)
+  },
     ]
   }
 ];
