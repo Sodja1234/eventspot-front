@@ -1,14 +1,15 @@
 import { Component, OnInit, OnDestroy, inject } from '@angular/core';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { EventCardComponent } from '../event-card/event-card.component';
 import { EventSearch } from '../../models/event';
 import { EventService } from '../../services/event.service';
 import { firstValueFrom } from 'rxjs';
 import { initFlowbite } from 'flowbite';
+import { Interet } from '../../models/interet';
 
 @Component({
   selector: 'app-home',
-  imports: [NgFor, EventCardComponent],
+  imports: [NgFor, NgIf, EventCardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -20,14 +21,18 @@ export class HomeComponent implements OnInit, OnDestroy {
   ];
 
   eventThrees: EventSearch[] = [];
+  eventInterets: EventSearch[] = [];
   eventService: EventService = inject(EventService);
+  isLogged: boolean = false;
+  interets: Interet[] = JSON.parse(localStorage.getItem('interets') || '[]');
+  count: number = 6;
 
   ngOnInit(): void {
     initFlowbite();
     this.loadEvents();
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void { }
 
   async loadEvents() {
     try {
@@ -35,6 +40,18 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.eventThrees = response.data;
       console.log(this.eventThrees);
 
+      this.isLogged = (localStorage.getItem('token') != null) ? true : false;
+      if (this.interets.length > 0 && this.isLogged) {
+        this.count = (this.interets.length == 2) ? 3 : 6;
+        this.count = (this.interets.length == 3) ? 2 : 6;
+        for (let i = 0; i < this.interets.length; i++) {
+          const responseInterets = await firstValueFrom(this.eventService.getEventByInterets(this.interets[i].nom, this.count));
+          console.log(this.interets[i].nom);
+          console.log(responseInterets);
+          console.log(responseInterets.data);
+          this.eventInterets.push(...responseInterets.data);
+        }
+      }
     } catch (error: any) {
       if (error.status === 404) {
         console.error('Erreur 404 : Ressource non trouvée.');

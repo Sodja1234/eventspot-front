@@ -181,4 +181,10 @@
   <div class="grid grid-rows grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mx-auto gap-4 p-4">
     <app-event-card [event]="event" *ngFor="let event of eventThrees" class="w-full mx-auto"></app-event-card>
   </div>
+  <div *ngIf="isLogged" class="max-w-2x1 mx-auto text-center mb-5 lg:mb-5">
+    <h1 class="text-5xl text-extrabold text-purple-600">Evenements liées à vos centres d'intérets</h1>
+  </div>
+  <div *ngIf="isLogged" class="grid grid-rows grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mx-auto gap-4 p-4">
+    <app-event-card [event]="event" *ngFor="let event of eventInterets" class="w-full mx-auto"></app-event-card>
+  </div>
 </div>
