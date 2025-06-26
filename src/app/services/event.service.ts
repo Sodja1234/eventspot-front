@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Category } from '../models/category';
 import { EventSearch } from '../models/event';
-import { ResponseThree, Response} from '../models/response';
+import { ResponseThree, Response } from '../models/response';
 import { UserService } from './user.service';
 
 
@@ -15,7 +15,7 @@ export class EventService {
 
   private apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient , private userService: UserService) {}
+  constructor(private http: HttpClient, private userService: UserService) { }
 
   createEvent(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/evenements`, data);
@@ -25,7 +25,7 @@ export class EventService {
     if (url != null) {
       return this.http.get<Response<Category>>(`${url}`);
     }
-    if(all) {
+    if (all) {
 
       return this.http.get<Response<Category>>(`${this.apiUrl}/categories?all=1`);
     }
@@ -38,7 +38,7 @@ export class EventService {
   }
 
   getLastEvents(count: number = 3, excludeId: number = 0): Observable<ResponseThree<EventSearch>> {
-    if(excludeId) {
+    if (excludeId) {
       return this.http.get<ResponseThree<EventSearch>>(`${this.apiUrl}/events?latest=true&count=${count}&exclude=true&exclude_id=${excludeId}`);
     }
     return this.http.get<ResponseThree<EventSearch>>(`${this.apiUrl}/events?latest=true&count=${count}`);
@@ -53,58 +53,69 @@ export class EventService {
 
 
   getOrganizerEvents(
-  filter: string = 'all',
-  search: string = '',
-  page: number = 1,
-  perPage: number = 6
-): Observable<any> {
-  const token = this.userService.getToken();
+    filter: string = 'all',
+    search: string = '',
+    page: number = 1,
+    perPage: number = 6
+  ): Observable<any> {
+    const token = this.userService.getToken();
 
-  const headers = new HttpHeaders({
-    Authorization: `Bearer ${token}`,
-  });
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
 
-  let params = new HttpParams()
-    .set('page', page.toString())
-    .set('perPage', perPage.toString());
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('perPage', perPage.toString());
 
-  if (search) {
-    params = params.set('search', search);
+    if (search) {
+      params = params.set('search', search);
+    }
+
+    return this.http.get(`${this.apiUrl}/dashboard/organizer/events/${filter}`, {
+      headers,
+      params,
+    });
   }
-
-  return this.http.get(`${this.apiUrl}/dashboard/organizer/events/${filter}`, {
-    headers,
-    params, 
-  });
-}
 
 
 
   getOrganizerTickets(): Observable<any> {
 
-const token = this.userService.getToken();
-  console.log('Token utilisé pour l\'authentification :', token);
+    const token = this.userService.getToken();
+    console.log('Token utilisé pour l\'authentification :', token);
 
-  const headers = new HttpHeaders({
-    Authorization: `Bearer ${token}`,
-  });
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
 
-  return this.http.get(`${this.apiUrl}/dashboard/user/tickets`, {
-    headers,
-  });
-}
+    return this.http.get(`${this.apiUrl}/dashboard/user/tickets`, {
+      headers,
+    });
+  }
 
 
-getSubscribers(eventId: number): Observable<any> {
-  const token = this.userService.getToken();
+  getSubscribers(eventId: number): Observable<any> {
+    const token = this.userService.getToken();
 
-  const headers = new HttpHeaders({
-    Authorization: `Bearer ${token}`,
-  });
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
 
-  return this.http.get(`${this.apiUrl}/events/${eventId}/subscribers`, {
-    headers,
-  });
-}
+    return this.http.get(`${this.apiUrl}/events/${eventId}/subscribers`, {
+      headers,
+    });
+  }
+
+  getFavoriteEvents(token: string): Observable<Response<EventSearch>> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.get<Response<EventSearch>>(`${this.apiUrl}/favorites`, { headers });
+  }
+
+  getEventByInterets(nom: string, count: number): Observable<Response<EventSearch>> {
+    return this.http.get<Response<EventSearch>>(`${this.apiUrl}/events?recent_by_category=${nom}&recent_count=${count}`);
+  }
+
 
 }

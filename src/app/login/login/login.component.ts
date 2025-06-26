@@ -42,6 +42,8 @@ export class LoginComponent {
       const response = await this.userService.login({ email, password });
 
       const userData = response?.data;
+      console.log(response);
+
 
       if (userData?.token && userData?.role) {
         // 🔐 Enregistrement des données utilisateur
@@ -50,17 +52,18 @@ export class LoginComponent {
         localStorage.setItem('email', userData.email);
         localStorage.setItem('userId', String(userData.id));
         localStorage.setItem('role', userData.role);
+        localStorage.setItem('interets', JSON.stringify(userData.interets));
 
         console.log('Connexion réussie, utilisateur :', userData);
-        
-        
 
-        
+
+
+
       if (localStorage.getItem('role') === 'organisateur') {
           this.router.navigate(['/dashboard']);
       } else {
           this.router.navigate(['']);
-        
+
       }
 
 
@@ -139,20 +142,20 @@ export class LoginComponent {
 //       this.loginForm.markAllAsTouched();
 //       return;
 //     }
-  
+
 //     this.isLoading = true;
 //     this.errorMessage = null;
-  
+
 //     try {
 //       const { email, password } = this.loginForm.value;
 //       const response = await this.userService.login({ email, password });
-  
+
 //       const userData = response?.data;
-  
+
 //       if (userData?.token && userData?.role) {
 //         this.userService.saveUserSession(userData.token, userData);
 //         console.log('Connexion réussie, utilisateur :', userData);
-  
+
 //         if (userData.role === 'organisateur') {
 //           this.router.navigate(['/register']);
 //         } else {
@@ -162,7 +165,7 @@ export class LoginComponent {
 //         console.warn(' Réponse inattendue du backend :', response);
 //         this.errorMessage = 'Réponse du serveur invalide';
 //       }
-  
+
 //     } catch (err: any) {
 //       console.error(' Erreur lors de la connexion :', err);
 //       this.errorMessage = err?.error?.message || 'Échec de la connexion';
@@ -172,10 +175,10 @@ export class LoginComponent {
 //   }
 
 //   loginWithGoogle() {
-//     this.userService.socialLogin('google'); 
+//     this.userService.socialLogin('google');
 //   }
 
 //   loginWithFacebook() {
-//     this.userService.socialLogin('facebook'); 
+//     this.userService.socialLogin('facebook');
 //   }
 // }
