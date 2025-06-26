@@ -52,25 +52,33 @@ export class EventService {
   }
 
 
-   getOrganizerEvents(filter: string = 'all', search: string = ''): Observable<any> {
- const token = this.userService.getToken()
-  console.log('Token utilisé pour l\'authentification :', token);
+  getOrganizerEvents(
+  filter: string = 'all',
+  search: string = '',
+  page: number = 1,
+  perPage: number = 6
+): Observable<any> {
+  const token = this.userService.getToken();
 
+  const headers = new HttpHeaders({
+    Authorization: `Bearer ${token}`,
+  });
 
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
+  let params = new HttpParams()
+    .set('page', page.toString())
+    .set('perPage', perPage.toString());
 
-    let params = new HttpParams();
-    if (search) {
-      params = params.set('search', search);
-    }
-
-    return this.http.get(`${this.apiUrl}/dashboard/organizer/events/${filter}`, {
-      headers,
-      params,
-    });
+  if (search) {
+    params = params.set('search', search);
   }
+
+  return this.http.get(`${this.apiUrl}/dashboard/organizer/events/${filter}`, {
+    headers,
+    params, 
+  });
+}
+
+
 
   getOrganizerTickets(): Observable<any> {
 
@@ -82,6 +90,19 @@ const token = this.userService.getToken();
   });
 
   return this.http.get(`${this.apiUrl}/dashboard/user/tickets`, {
+    headers,
+  });
+}
+
+
+getSubscribers(eventId: number): Observable<any> {
+  const token = this.userService.getToken();
+
+  const headers = new HttpHeaders({
+    Authorization: `Bearer ${token}`,
+  });
+
+  return this.http.get(`${this.apiUrl}/events/${eventId}/subscribers`, {
     headers,
   });
 }

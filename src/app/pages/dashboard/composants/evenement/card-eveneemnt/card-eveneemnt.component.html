@@ -1,52 +1,3 @@
-<!-- 
-
-                        <div class="bg-white rounded-lg shadow-md overflow-hidden">
-  <div class="relative">
-    <img src="https://via.placeholder.com/400x200" alt="Image événement"
-      class="w-full h-48 object-cover" />
-
-    <div class="absolute top-0 right-0 text-white text-xs font-bold px-2 py-1 m-2 rounded"
-      [ngClass]="getBadgeColor()">
-      {{ getStatus() }}
-    </div>
-  </div>
-
-  <div class="p-6">
-    <div class="flex justify-between items-start mb-2">
-      <span class="bg-purple-100 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-        {{ event.cycle || 'Cycle inconnu' }}
-      </span>
-      <span class="text-gray-600 text-sm">
-        {{ getFormattedDate(event.date_time_start) }}
-      </span>
-    </div>
-
-    <h3 class="text-xl font-bold mb-2">
-      {{ event.title || 'Titre non défini' }}
-    </h3>
-
-    <p class="text-gray-600 text-sm mb-3">
-      {{ event.description || 'Aucune description' }}
-    </p>
-
-    <div class="flex items-center mb-4">
-      <i class="fas fa-user text-gray-500 mr-2"></i>
-      <span class="text-gray-700">
-        Organisé par {{ event.created_by?.name || 'Inconnu' }}
-      </span>
-    </div>
-
-    <div class="flex space-x-2">
-      <a href="edit-event.html" class="flex-1 bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition text-center">
-        <i class="fas fa-edit mr-1"></i> Modifier
-      </a>
-      <button class="bg-gray-200 text-gray-700 p-2 rounded-lg hover:bg-gray-300 transition">
-        <i class="fas fa-chart-bar"></i>
-      </button>
-    </div>
-  </div>
-</div> -->
-
 
 
 <div class="bg-white rounded-lg shadow-md overflow-hidden">
@@ -56,16 +7,16 @@
       <div class="flex-1 mb-4 md:mb-0">
         <!-- En-tête avec catégorie et date -->
         <div class="flex items-center mb-3">
-          <span class="bg-purple-100 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded mr-3">
+          <!-- <span class="bg-purple-100 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded mr-3">
             {{ event.cycle || 'Cycle inconnu' }}
-          </span>
-          <span class="text-gray-600 text-sm">
+          </span> -->
+          <!-- <span class="text-gray-600 text-sm">
             {{ getFormattedDate(event.date_time_start) }}
           </span>
           <span class="ml-auto text-xs font-semibold px-2.5 py-0.5 rounded" 
                 [ngClass]="getBadgeColor()">
             {{ getStatus() }}
-          </span>
+          </span> -->
         </div>
 
         <!-- Titre et description -->
@@ -80,7 +31,7 @@
         <div class="flex flex-wrap gap-4 text-sm text-gray-700">
           <div class="flex items-center">
             <i class="fas fa-map-marker-alt text-gray-500 mr-2"></i>
-            <span>{{ event.location || 'Lieu non spécifié' }}</span>
+            <span>{{ event.address || 'Lieu non spécifié' }}</span>
           </div>
           <div class="flex items-center">
             <i class="fas fa-user text-gray-500 mr-2"></i>
@@ -104,9 +55,11 @@
              class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition flex items-center justify-center">
             <i class="fas fa-edit mr-2"></i> Modifier
           </a>
-          <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition flex items-center justify-center">
+          <a [routerLink]="['/event', event?.id]" routerLinkActive="router-link-active" >
+          <button  class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition flex items-center justify-center">
             <i class="fas fa-chart-bar mr-2"></i> Stats
           </button>
+          </a>
         </div>
       </div>
     </div>

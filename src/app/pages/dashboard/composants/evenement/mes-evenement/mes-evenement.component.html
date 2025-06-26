@@ -1,13 +1,22 @@
-<!-- <app-tri-evenement></app-tri-evenement>
-
+ 
+<!--
 
 <div *ngIf="loading" class="text-center my-10">Chargement...</div>
 
 <div *ngIf="!loading && evenements.length === 0" class="text-center my-10">
   Aucun événement trouvé.
 </div> -->
-
+<app-tri-evenement></app-tri-evenement>
 
 <div class="grid grid-cols-1 gap-6" *ngIf="evenements.length > 0">
   <app-card-eveneemnt *ngFor="let evenement of evenements" [event]="evenement"></app-card-eveneemnt>
+</div>
+<div *ngIf="!loading && meta" class="flex justify-center items-center mt-8 gap-4">
+  <button (click)="prevPage()" [disabled]="page === 1" class="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300">
+    Précédent
+  </button>
+  <span class="text-sm text-gray-600">Page {{ page }} sur {{ meta.last_page }}</span>
+  <button (click)="nextPage()" [disabled]="page === meta.last_page" class="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300">
+    Suivant
+  </button>
 </div>

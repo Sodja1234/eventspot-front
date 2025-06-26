@@ -1,9 +1,10 @@
 import { CommonModule, NgClass } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-card-eveneemnt',
-  imports: [NgClass,CommonModule],
+  imports: [CommonModule, RouterLink , RouterLinkActive],
   templateUrl: './card-eveneemnt.component.html',
   styleUrl: './card-eveneemnt.component.css'
 })
