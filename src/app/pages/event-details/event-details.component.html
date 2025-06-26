@@ -83,6 +83,34 @@
         alt="">
     </div>
   </div>
+  
+@if (userRole == "organisateur") {
+
+  
+<div class="bg-white rounded-lg shadow-md p-6 mt-6">
+  <h2 class="text-xl font-bold text-purple-600 mb-4">
+    Abonnés à l'événement : {{ eventName }}
+  </h2>
+
+  <p class="text-sm text-gray-600 mb-4">
+    Nombre total : {{ totalAbonnes }} abonné(s)
+  </p>
+
+  <div *ngIf="subscribers.length > 0; else noAbonnes">
+    <ul class="divide-y divide-gray-200">
+      <li *ngFor="let abonne of subscribers" class="py-2">
+        <p class="text-base font-medium text-black">{{ abonne.name }}</p>
+        <p class="text-sm text-gray-500">{{ abonne.email }} — {{ abonne.created_at }}</p>
+      </li>
+    </ul>
+  </div>
+
+  <ng-template #noAbonnes>
+    <p class="text-gray-400 text-sm">Aucun abonné pour cet événement.</p>
+  </ng-template>
+</div>
+
+}@else {
   <div class="dark:bg-gray-900 mx-auto pt-10">
     <div class="max-w-2x1 mx-auto text-center mb-5 lg:mb-5">
       <h1 class="text-5xl text-extrabold text-purple-600">Evenements récemment publiés</h1>
@@ -91,4 +119,6 @@
       <app-event-card [event]="event" *ngFor="let event of eventThrees" class="w-full mx-auto"></app-event-card>
     </div>
   </div>
+}
 </div>
+

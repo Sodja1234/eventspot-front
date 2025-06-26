@@ -55,8 +55,15 @@ export class LoginComponent {
         
         
 
-        // 🔁 Redirection vers `/evenement`
-        this.router.navigate(['']);
+        
+      if (localStorage.getItem('role') === 'organisateur') {
+          this.router.navigate(['/dashboard']);
+      } else {
+          this.router.navigate(['']);
+        
+      }
+
+
       } else {
         console.warn('Réponse inattendue du backend :', response);
         this.errorMessage = 'Réponse du serveur invalide';
