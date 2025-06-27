@@ -1,4 +1,5 @@
 import { Category } from "./category";
+import { Media } from "./media";
 import { Ticket } from "./ticket";
 import { UserSearch } from "./user";
 
@@ -8,15 +9,15 @@ export interface Event {
     category_ids: string[];
     location: {
       address: string;
-      lat: number;  
-      lng: number;  
+      lat: number;
+      lng: number;
     };
   };
   details: {
     description: string;
   };
   tickets: {
-    ticketTypes: string[]; 
+    ticketTypes: string[];
     date_time_start: Date;
     date_time_end: Date;
   };
@@ -32,4 +33,5 @@ export  interface EventSearch {
   date_time_start: String;
   date_time_end: String;
   tickets: Ticket[];
+  media : Media;
 }

@@ -1,9 +1,7 @@
 <div class="w-full mx-auto bg-gray-100 rounded-lg py-4">
   <div class="w-full ease-in-out flex flex-col py-3">
     <!-- Partie image : 80% -->
-    <img
-      src="https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-      class="block w-full object-cover rounded-t-2xl h-120 " alt="img" />
+    <img [src]="imageUrl" class="block w-full object-cover rounded-t-2xl h-120 " alt="img" />
     <!-- Partie texte : 20% avec background purple-600 -->
     <div class="uppercase rounded-b-4xl bg-purple-600 items-left my-auto justify-top px-5 py-10 w-full text-white
                     sm:px-10 md:px-20">
@@ -20,9 +18,7 @@
       <!-- Bouton -->
       <div class="flex items-center">
         <div class="shrink-0">
-          <img class="size-10 rounded-full"
-            src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
-            alt="Avatar">
+          <img class="size-10 rounded-full" [src]="imageUrl" alt="Avatar">
         </div>
         <div class="ms-4">
           <div class="text-lg font-semibold text-black uppercase tracking-widest mb-2"> {{ event.created_by.name }}</div>
@@ -83,10 +79,10 @@
         alt="">
     </div>
   </div>
-  
+
 @if (userRole == "organisateur") {
 
-  
+
 <div class="bg-white rounded-lg shadow-md p-6 mt-6">
   <h2 class="text-xl font-bold text-purple-600 mb-4">
     Abonnés à l'événement : {{ eventName }}
