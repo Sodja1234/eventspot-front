@@ -6,6 +6,7 @@ import { Category } from '../models/category';
 import { EventSearch } from '../models/event';
 import { ResponseThree, Response } from '../models/response';
 import { UserService } from './user.service';
+import { Etat } from '../models/etat';
 
 
 @Injectable({
@@ -115,10 +116,43 @@ export class EventService {
 
     return this.http.get<Response<EventSearch>>(`${this.apiUrl}/favorites`, { headers });
   }
+  verifyFavorite(eventId: number): Observable<{ data: Etat }> {
+    const token = this.userService.getToken();
+    const headers = new HttpHeaders({ Authorization: `Bearer ${token}`, });
+
+    return this.http.get<{ data: Etat}>(`${this.apiUrl}/events/${eventId}/favorite`, { headers });
+  }
+  addFavorite(eventId: number) {
+    const token = this.userService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    const body = { eventId: eventId };
+
+    return this.http.post(`${this.apiUrl}/events/${eventId}/favorite`, body, { headers });
+  }
+  verifySubscribe(eventId: number): Observable<{ data: Etat }> {
+    const token = this.userService.getToken();
+    const headers = new HttpHeaders({ Authorization: `Bearer ${token}`, });
+
+    return this.http.get<{ data: Etat }>(`${this.apiUrl}/events/${eventId}/subscribe`, { headers });
+  }
+  addSubcribe(eventId: number) {
+    const token = this.userService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    const body = { eventId: eventId };
+
+    return this.http.post(`${this.apiUrl}/events/${eventId}/subscribe`, body, { headers });
+  }
 
   getEventByInterets(nom: string, count: number): Observable<Response<EventSearch>> {
     return this.http.get<Response<EventSearch>>(`${this.apiUrl}/events?recent_by_category=${nom}&recent_count=${count}`);
   }
-
 
 }
