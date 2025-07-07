@@ -22,7 +22,8 @@ export class EventCardComponent {
   userService: UserService = inject(UserService);
   isFavorited = false;
   isSusccribed = false;
-  etat: Etat = {} as Etat;
+  etatFavorite: Etat = {} as Etat;
+  etatSubscribe: Etat = {} as Etat;
 
   navigateToEvent() {
     this.router.navigate(['/event', this.event?.id]);
@@ -34,11 +35,14 @@ export class EventCardComponent {
   }
   async load(){
     try {
-      const response = await firstValueFrom(this.eventService.verifyFavorite(this.event?.id ?? 0));
-      this.etat = response.data ;
-      this.isFavorited = this.etat.etat == 1 ? true : false;
-      console.log(this.etat.etat);
-
+      const responseFavorite = await firstValueFrom(this.eventService.verifyFavorite(this.event?.id ?? 0));
+      const responseSubscribe = await firstValueFrom(this.eventService.verifySubscribe(this.event?.id ?? 0));
+      this.etatFavorite = responseFavorite.data ;
+      this.etatSubscribe = responseSubscribe.data ;
+      this.isFavorited = this.etatFavorite.etat == 1 ? true : false;
+      this.isSusccribed = this.etatSubscribe.etat == 1 ? true : false;
+      console.log('etatFavorite', this.event?.id, ' : ', this.etatFavorite.etat);
+      console.log('etatSubscribe', this.event?.id, ' : ', this.etatSubscribe.etat);
 
     } catch (error: any) {
       if (error.status === 404) {
@@ -60,15 +64,34 @@ export class EventCardComponent {
       console.error('Erreur lors de l’ajout du favori', error);
     }
   }
+
+  async markAsSubscribe() {
+    let token = this.userService.getToken();
+    try {
+      const response = await firstValueFrom(this.eventService.addSubcribe(this.event?.id ?? 0));
+      console.log('Souscrption ajouté avec succès', response);
+    } catch (error) {
+      console.error('Erreur lors de l’ajout du Souscrption', error);
+    }
+  }
   toggleFavorite(event: MouseEvent){
     event.stopPropagation();
     event.preventDefault();
-    this.markAsFavorite();
-    this.ngOnInit();
+    if (this.userService.getToken()) {
+      this.markAsFavorite();
+      this.ngOnInit();
+    }else{
+      this.router.navigate(['/login']);
+    }
   }
   toggleSuscribe(event: MouseEvent) {
     event.stopPropagation();
     event.preventDefault();
-    this.isSusccribed = !this.isSusccribed;
+    if (this.userService.getToken()) {
+      this.markAsSubscribe();
+      this.ngOnInit();
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 }
