@@ -126,12 +126,29 @@ export class EventService {
     const token = this.userService.getToken();
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'  // souvent utile pour POST JSON
+      'Content-Type': 'application/json'
     });
 
     const body = { eventId: eventId };
 
-    return this.http.post('http://localhost:8000/api/events/' + eventId + '/favorite', body, { headers });
+    return this.http.post(`${this.apiUrl}/events/${eventId}/favorite`, body, { headers });
+  }
+  verifySubscribe(eventId: number): Observable<{ data: Etat }> {
+    const token = this.userService.getToken();
+    const headers = new HttpHeaders({ Authorization: `Bearer ${token}`, });
+
+    return this.http.get<{ data: Etat }>(`${this.apiUrl}/events/${eventId}/subscribe`, { headers });
+  }
+  addSubcribe(eventId: number) {
+    const token = this.userService.getToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    const body = { eventId: eventId };
+
+    return this.http.post(`${this.apiUrl}/events/${eventId}/subscribe`, body, { headers });
   }
 
   getEventByInterets(nom: string, count: number): Observable<Response<EventSearch>> {
