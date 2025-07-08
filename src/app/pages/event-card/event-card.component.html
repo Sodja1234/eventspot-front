@@ -1,6 +1,6 @@
 <a [routerLink]="['/event', event?.id]"
   class="relative bg-white rounded-lg shadow-md h-85 w-80 overflow-hidden hover:shadow-xl transition dark:bg-gray-900 dark:text-white dark:border dark:border-gray-700">
-  <img [src]="baseUrl +event?.media?.url"  alt="Event Image" class="w-80 h-50 object-cover brightness-75">
+  <img [src]="baseUrl +event?.media?.url"  alt="Event Image" class="w-80 h-50 object-cover brightness-75" (error)="handleImageError($event)" alt="Image de l'événement" />
   <div class="h-35 w-80">
     <div class="flex rounded-2xl bg-[#f6f4ee] h-full w-full shadow-lg overflow-hidden relative">
       <div class="flex flex-col justify-between px-5 py-4 relative h-full w-full">

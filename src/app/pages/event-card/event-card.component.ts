@@ -7,6 +7,7 @@ import { EventService } from '../../services/event.service';
 import { Etat } from '../../models/etat';
 import { firstValueFrom } from 'rxjs';
 import { UserService } from '../../services/user.service';
+import { ImageErrorService } from '../../services/image-error.service';
 
 @Component({
   selector: 'app-event-card',
@@ -20,6 +21,7 @@ export class EventCardComponent {
   baseUrl = environment.baseUrl;
   eventService: EventService = inject(EventService);
   userService: UserService = inject(UserService);
+  imageErrorService: ImageErrorService = inject(ImageErrorService);
   isFavorited = false;
   isSusccribed = false;
   etatFavorite: Etat = {} as Etat;
@@ -93,5 +95,9 @@ export class EventCardComponent {
     } else {
       this.router.navigate(['/login']);
     }
+  }
+
+  handleImageError(event: Event) {
+    this.imageErrorService.onImageError(event);
   }
 }
