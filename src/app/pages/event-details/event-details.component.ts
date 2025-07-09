@@ -9,6 +9,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { NgFor, NgIf } from '@angular/common';
 import { UserService } from '../../services/user.service';
 import { environment } from '../../../environnement/environnement';
+import { ImageErrorService } from '../../services/image-error.service';
 
 @Component({
   selector: 'app-event-details',
@@ -22,6 +23,7 @@ export class EventDetailsComponent {
   eventThrees: EventSearch[] = [];
   eventService: EventService = inject(EventService);
   userService: UserService = inject(UserService);
+  imageErrorService: ImageErrorService = inject(ImageErrorService);
   id: number = -1;
   descriptionHtml: SafeHtml | undefined;
   subscribers: any[] = [];
@@ -86,6 +88,9 @@ export class EventDetailsComponent {
     }
   }
 
+  handleImageError(event: Event) {
+    this.imageErrorService.onImageError(event);
+  }
 
   async getUserRole(): Promise<string> {
     const user = this.userService.getCurrentUser();

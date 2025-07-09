@@ -6,10 +6,11 @@ import { EventService } from '../../services/event.service';
 import { firstValueFrom } from 'rxjs';
 import { initFlowbite } from 'flowbite';
 import { Interet } from '../../models/interet';
+import { CarouselComponent } from '../carousel/carousel.component';
 
 @Component({
   selector: 'app-home',
-  imports: [NgFor, NgIf, EventCardComponent],
+  imports: [NgFor, NgIf, EventCardComponent, CarouselComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

@@ -1,7 +1,7 @@
 <div class="w-full mx-auto bg-gray-100 rounded-lg py-4">
   <div class="w-full ease-in-out flex flex-col py-3">
     <!-- Partie image : 80% -->
-    <img [src]="imageUrl" class="block w-full object-cover rounded-t-2xl h-120 " alt="img" />
+    <img [src]="imageUrl" class="block w-full object-cover rounded-t-2xl h-120 " (error)="handleImageError($event)" alt="Image de l'événement" alt="img" />
     <!-- Partie texte : 20% avec background purple-600 -->
     <div class="uppercase rounded-b-4xl bg-purple-600 items-left my-auto justify-top px-5 py-10 w-full text-white
                     sm:px-10 md:px-20">
@@ -18,7 +18,7 @@
       <!-- Bouton -->
       <div class="flex items-center">
         <div class="shrink-0">
-          <img class="size-10 rounded-full" [src]="imageUrl" alt="Avatar">
+          <img class="size-10 rounded-full" [src]="imageUrl" (error)="handleImageError($event)" alt="Avatar">
         </div>
         <div class="ms-4">
           <div class="text-lg font-semibold text-black uppercase tracking-widest mb-2"> {{ event.created_by.name }}</div>

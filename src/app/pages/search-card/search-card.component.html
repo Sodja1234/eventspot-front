@@ -2,8 +2,8 @@
   class="flex border-b border-gray-200 dark:border-gray-600 space-x-4 rtl:space-x-reverse gap-2 p-3 h-40">
   <div class="w-[10%] sm:w-[30%] h-[95%] flex items-center justify-center">
     <img
-      src="https://images.unsplash.com/photo-1568772472528-9f7f5795e094?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGZyZWUlMjBhdWRpdG9yaXVtfGVufDB8fDB8fHww"
-      class="w-51 h-[100%] border-gray-200 dark:border-gray-600 rounded-lg hidden sm:block" alt="Neil image">
+      [src]="baseUrl +event?.media?.url"
+      class="w-51 h-[100%] border-gray-200 dark:border-gray-600 rounded-lg hidden sm:block"  (error)="handleImageError($event)" alt="Image de l'événement" >
     <svg class="w-[48px] h-[48px] sm:hidden text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
       width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
       <path
@@ -19,8 +19,7 @@
     </div>
     <div class="h-3/4">
       <p class="text-sm m-2 font-medium text-gray-900 dark:text-white">
-        {{ event?.title }} Supercharge your editor with AI that understands your codebase, streamlines development, and helps you write, refactor,
-        and debug with ease.
+        {{ event?.title }} 
       </p>
     </div>
   </div>

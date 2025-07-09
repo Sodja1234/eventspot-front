@@ -1,0 +1,170 @@
+<div id="combined-carousel" class="relative w-screen left-1/2 right-1/2 -translate-x-1/2" data-carousel="slide">
+  <div class="relative h-140 overflow-hidden rounded-xl">
+    <!-- Slide 1 -->
+    <div class="hidden w-full duration-1000 ease-in-out h-160 flex flex-col lg:flex-row" data-carousel-item>
+      <!-- Partie image : 80% -->
+      <img [src]="baseUrl +events[0].media.url" (error)="handleImageError($event)" class="block w-full object-cover h-[55%] lg:h-full lg:w-[60%]" alt="Slide 1" />
+      <!-- Partie texte : 20% avec background purple-600 -->
+      <div class="uppercase bg-purple-800 items-left my-auto justify-top px-5 py-10 h-[45%] text-white
+                  sm:px-10 md:px-20 lg:py-20 lg:h-full lg:w-[40%]">
+        <!-- Date et heure -->
+        <p class="uppercase text-sm tracking-wide mb-5 lg:mb-10">{{ events[0].date_time_start }}</p>
+
+        <!-- Nom de l'artiste -->
+        <h1 class="text-xl font-black w-[90%] text-black mb-5 sm:text-2xl lg:text-3xl lg:mb-10 xl:text-4xl">{{ events[0].title }}</h1>
+
+        <!-- Bouton -->
+        <button [routerLink]="['/event', events[0].id]" class="bg-black w-20 text-sm text-white px-2 py-2 font-semibold flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+          Infos
+        </button>
+      </div>
+    </div>
+    <!-- Slide 2 -->
+    <div class="hidden w-full duration-700 ease-in-out h-160 flex flex-col lg:flex-row" data-carousel-item>
+      <!-- Partie image : 80% -->
+      <img [src]="baseUrl +events[1].media.url" (error)="handleImageError($event)" class="block w-full object-cover h-[55%] lg:h-full lg:w-[60%]"
+        alt="Slide 1" />
+      <!-- Partie texte : 20% avec background purple-600 -->
+      <div class="uppercase bg-purple-800 items-left my-auto justify-top px-5 py-10 h-[45%] text-white
+                        sm:px-10 md:px-20 lg:py-20 lg:h-full lg:w-[40%]">
+        <!-- Date et heure -->
+        <p class="uppercase text-sm tracking-wide mb-5 lg:mb-10">{{ events[1].date_time_start }}</p>
+
+        <!-- Nom de l'artiste -->
+        <h1 class="text-xl font-black w-[90%] text-black mb-5 sm:text-2xl lg:text-3xl lg:mb-10 xl:text-4xl">{{ events[1].title
+          }}</h1>
+
+        <!-- Bouton -->
+        <button [routerLink]="['/event', events[1].id]"
+          class="bg-black w-20 text-sm text-white px-2 py-2 font-semibold flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+          Infos
+        </button>
+      </div>
+    </div>
+    <!-- Slide 3 -->
+    <div class="hidden w-full duration-700 ease-in-out h-160 flex flex-col lg:flex-row" data-carousel-item>
+      <!-- Partie image : 80% -->
+      <img [src]="baseUrl +events[2].media.url" (error)="handleImageError($event)"
+        class="block w-full object-cover h-[55%] lg:h-full lg:w-[60%]" alt="Slide 1" />
+      <!-- Partie texte : 20% avec background purple-600 -->
+      <div class="uppercase bg-purple-800 items-left my-auto justify-top px-5 py-10 h-[45%] text-white
+                        sm:px-10 md:px-20 lg:py-20 lg:h-full lg:w-[40%]">
+        <!-- Date et heure -->
+        <p class="uppercase text-sm tracking-wide mb-5 lg:mb-10">{{ events[2].date_time_start }}</p>
+
+        <!-- Nom de l'artiste -->
+        <h1 class="text-xl font-black w-[90%] text-black mb-5 sm:text-2xl lg:text-3xl lg:mb-10 xl:text-4xl">{{ events[2].title }}</h1>
+
+        <!-- Bouton -->
+        <button [routerLink]="['/event', events[2].id]"
+          class="bg-black w-20 text-sm text-white px-2 py-2 font-semibold flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+          Infos
+        </button>
+      </div>
+    </div>
+    <!-- Slide 4 -->
+    <div class="hidden w-full duration-700 ease-in-out h-160 flex flex-col lg:flex-row" data-carousel-item>
+      <!-- Partie image : 80% -->
+      <img [src]="baseUrl +events[3].media.url" (error)="handleImageError($event)"
+        class="block w-full object-cover h-[55%] lg:h-full lg:w-[60%]" alt="Slide 1" />
+      <!-- Partie texte : 20% avec background purple-600 -->
+      <div class="uppercase bg-purple-800 items-left my-auto justify-top px-5 py-10 h-[45%] text-white
+                              sm:px-10 md:px-20 lg:py-20 lg:h-full lg:w-[40%]">
+        <!-- Date et heure -->
+        <p class="uppercase text-sm tracking-wide mb-5 lg:mb-10">{{ events[3].date_time_start }}</p>
+
+        <!-- Nom de l'artiste -->
+        <h1 class="text-xl font-black w-[90%] text-black mb-5 sm:text-2xl lg:text-3xl lg:mb-10 xl:text-4xl">{{ events[3].title
+          }}</h1>
+
+        <!-- Bouton -->
+        <button [routerLink]="['/event', events[3].id]"
+          class="bg-black w-20 text-sm text-white px-2 py-2 font-semibold flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+          Infos
+        </button>
+      </div>
+    </div>
+    <!-- Slide 5 -->
+    <div class="hidden w-full duration-700 ease-in-out h-160 flex flex-col lg:flex-row" data-carousel-item>
+      <!-- Partie image : 80% -->
+      <img [src]="baseUrl +events[4].media.url" (error)="handleImageError($event)"
+        class="block w-full object-cover h-[55%] lg:h-full lg:w-[60%]" alt="Slide 1" />
+      <!-- Partie texte : 20% avec background purple-600 -->
+      <div class="uppercase bg-purple-800 items-left my-auto justify-top px-5 py-10 h-[45%] text-white
+                              sm:px-10 md:px-20 lg:py-20 lg:h-full lg:w-[40%]">
+        <!-- Date et heure -->
+        <p class="uppercase text-sm tracking-wide mb-5 lg:mb-10">{{ events[4].date_time_start }}</p>
+
+        <!-- Nom de l'artiste -->
+        <h1 class="text-xl font-black w-[90%] text-black mb-5 sm:text-2xl lg:text-3xl lg:mb-10 xl:text-4xl">{{ events[4].title
+          }}</h1>
+
+        <!-- Bouton -->
+        <button [routerLink]="['/event', events[4].id]"
+          class="bg-black w-20 text-sm text-white px-2 py-2 font-semibold flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+          Infos
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slider indicators -->
+  <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-3/4 space-x-3 rtl:space-x-reverse">
+    <button type="button" class="w-4 h-4 rounded-full" aria-current="true" aria-label="Slide 2"
+      data-carousel-slide-to="1"></button>
+    <button type="button" class="w-4 h-4 rounded-full" aria-current="false" aria-label="Slide 3"
+      data-carousel-slide-to="2"></button>
+    <button type="button" class="w-4 h-4 rounded-full" aria-current="false" aria-label="Slide 4"
+      data-carousel-slide-to="3"></button>
+    <button type="button" class="w-4 h-4 rounded-full" aria-current="false" aria-label="Slide 5"
+      data-carousel-slide-to="4"></button>
+    <button type="button" class="w-4 h-4 rounded-full" aria-current="false" aria-label="Slide 6"
+      data-carousel-slide-to="5"></button>
+  </div>
+
+  <!-- Slider controls -->
+  <button type="button"
+    class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+    data-carousel-prev>
+    <span
+      class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+      <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4" />
+      </svg>
+      <span class="sr-only">Previous</span>
+    </span>
+  </button>
+  <button type="button"
+    class="absolute top-0  end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+    data-carousel-next>
+    <span
+      class="inline-flex items-center justify-center w-10 h-10 rounded-full border-teal-500 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+      <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+      </svg>
+      <span class="sr-only">Next</span>
+    </span>
+  </button>
+</div>
