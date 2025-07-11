@@ -22,7 +22,7 @@ export class EventService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.userService.getToken()}`,
     })
-    return this.http.post(`${this.apiUrl}/evenements`, data,{headers} );
+    return this.http.post(`${this.apiUrl}/events`, data, { headers });
   }
 
   getCategories(url?: string, all?: boolean): Observable<Response<Category>> {
@@ -38,7 +38,7 @@ export class EventService {
 
 
   getEventById(id: number): Observable<{ data: EventSearch }> {
-    return this.http.get<{ data: EventSearch }>(`${this.apiUrl}/events/id/${id}`);
+    return this.http.get<{ data: EventSearch }>(`${this.apiUrl}/events/${id}`);
   }
 
   getLastEvents(count: number = 3, excludeId: number = 0): Observable<ResponseThree<EventSearch>> {
@@ -76,7 +76,7 @@ export class EventService {
       params = params.set('search', search);
     }
 
-    return this.http.get(`${this.apiUrl}/dashboard/organizer/events/${filter}`, {
+    return this.http.get(`${this.apiUrl}/dashboard/events/${filter}`, {
       headers,
       params,
     });
@@ -114,13 +114,13 @@ export class EventService {
   getFavoriteEvents(token: string): Observable<Response<EventSearch>> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    return this.http.get<Response<EventSearch>>(`${this.apiUrl}/favorites`, { headers });
+    return this.http.get<Response<EventSearch>>(`${this.apiUrl}/events/favorites`, { headers });
   }
   verifyFavorite(eventId: number): Observable<{ data: Etat }> {
     const token = this.userService.getToken();
     const headers = new HttpHeaders({ Authorization: `Bearer ${token}`, });
 
-    return this.http.get<{ data: Etat}>(`${this.apiUrl}/events/${eventId}/favorite`, { headers });
+    return this.http.get<{ data: Etat }>(`${this.apiUrl}/events/${eventId}/favorite`, { headers });
   }
   addFavorite(eventId: number) {
     const token = this.userService.getToken();
