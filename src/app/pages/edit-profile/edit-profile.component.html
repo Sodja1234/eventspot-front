@@ -1,0 +1,119 @@
+<div class="min-h-screen bg-gray-50 py-6 px-2 md:px-8 flex flex-col">
+  <!-- Header -->
+  <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-8">
+    <h2 class="text-xl md:text-2xl font-semibold mb-4 md:mb-0">Edit Profile</h2>
+    <div class="flex items-center space-x-4 self-end md:self-auto">
+      <button class="relative" aria-label="Upload Image">
+        <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M15 17h5l-1.405-1.405M19 13V7a2 2 0 00-2-2h-4a2 2 0 00-2 2v6m0 4h.01"></path>
+        </svg>
+      </button>
+      <div class="w-9 h-9 rounded-full overflow-hidden border-2 border-gray-200">
+        <svg class="w-full h-full text-purple-600 bg-white rounded-full fill-teal-500" aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+          <path fill-rule="evenodd"
+            d="M12 20a7.966 7.966 0 0 1-5.002-1.756l.002.001v-.683c0-1.794 1.492-3.25 3.333-3.25h3.334c1.84 0 3.333 1.456 3.333 3.25v.683A7.966 7.966 0 0 1 12 20ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10c0 5.5-4.44 9.963-9.932 10h-.138C6.438 21.962 2 17.5 2 12Zm10-5c-1.84 0-3.333 1.455-3.333 3.25S10.159 13.5 12 13.5c1.84 0 3.333-1.455 3.333-3.25S13.841 7 12 7Z"
+            clip-rule="evenodd" />
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-col lg:flex-row gap-8 flex-1">
+    <!-- Main Form -->
+    <div class="flex-1 bg-white rounded-xl shadow p-4 sm:p-8">
+      <div class="flex flex-col items-center mb-8">
+        <div class="relative">
+          <svg class="w-24 h-24 text-purple-600 bg-white rounded-full fill-teal-500" aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd"
+              d="M12 20a7.966 7.966 0 0 1-5.002-1.756l.002.001v-.683c0-1.794 1.492-3.25 3.333-3.25h3.334c1.84 0 3.333 1.456 3.333 3.25v.683A7.966 7.966 0 0 1 12 20ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10c0 5.5-4.44 9.963-9.932 10h-.138C6.438 21.962 2 17.5 2 12Zm10-5c-1.84 0-3.333 1.455-3.333 3.25S10.159 13.5 12 13.5c1.84 0 3.333-1.455 3.333-3.25S13.841 7 12 7Z"
+              clip-rule="evenodd" />
+          </svg>
+          <button class="absolute bottom-2 right-2 bg-violet-600 text-white rounded-full p-1 border-2 border-white hover:bg-violet-700">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-label="Edit">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15.232 5.232l3.536 3.536M9 13l6-6m2 2l-6 6m-2 2H7v-2l6-6"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <form class="space-y-5" [formGroup]="editForm">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+          <input type="text" formControlName="nameForm" name="name"
+            class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-500" aria-label="Description de l'action du bouton"/>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+          <div class="relative">
+            <input type="email" placeholder="user?.email" name="email" [value]="user.email"
+              class="w-full border border-gray-300 rounded px-3 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-violet-500" readonly/>
+            <span class="absolute right-2 top-1/2 -translate-y-1/2 text-green-500">
+              <svg class="w-5 h-5 text-teal-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 14v3m-3-6V7a3 3 0 1 1 6 0v4m-8 0h10a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1Z" />
+              </svg>
+            </span>
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Profil</label>
+          <div class="relative">
+            <input type="text" [value]="user.role" name="name" placeholder="Public"
+              class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-500"
+              readonly />
+            <span class="absolute right-2 top-1/2 -translate-y-1/2 text-green-500">
+              <svg class="w-5 h-5 text-teal-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 14v3m-3-6V7a3 3 0 1 1 6 0v4m-8 0h10a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1Z" />
+              </svg>
+            </span>
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Interets</label>
+          <div class="flex  flex-wrap items-center gap-3">
+            @for(interet of interets; track interet.id){
+            <span class="flex justify-between items-center text-white w-1/5 px-3 py-2 rounded-md font-medium bg-teal-500 hover:bg-teal-600 transition" type="button" aria-label="interet">
+              <span >
+                {{ interet.nom }}
+              </span>
+              <button (click)="deleteInteret(interet.id)" type="button" aria-label="Description de l'action du bouton">
+                <svg class="w-5 h-5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                  height="24" fill="currentColor" viewBox="0 0 24 24">
+                  <path fill-rule="evenodd"
+                    d="M8.586 2.586A2 2 0 0 1 10 2h4a2 2 0 0 1 2 2v2h3a1 1 0 1 1 0 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a1 1 0 0 1 0-2h3V4a2 2 0 0 1 .586-1.414ZM10 6h4V4h-4v2Zm1 4a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Zm4 0a1 1 0 1 0-2 0v8a1 1 0 1 0 2 0v-8Z"
+                    clip-rule="evenodd" aria-label="jhjkjjlk" />
+                </svg>
+              </button>
+            </span>
+            }
+            <svg (click)="addInteret()" class="w-6 h-6 text-gray-800 dark:text-white border rounded" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+              height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5" />
+            </svg>
+          </div>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4 mt-6">
+          <button [routerLink]="['/profile']" type="button" class="flex-1 py-2 rounded bg-gray-100 text-gray-700 hover:bg-gray-200 transition">Back
+            To Home</button>
+          <button (click)="submit()" type="submit" class="flex-1 py-2 rounded bg-violet-700 text-white hover:bg-violet-800 transition">Save
+            Changes</button>
+        </div>
+      </form>
+    </div>
+    <!-- Side Menu -->
+    <aside class="w-full lg:w-64 bg-white rounded-xl shadow p-6 h-fit mt-8 lg:mt-0">
+      <nav class="space-y-4">
+        <a href="#" class="block text-violet-700 font-medium hover:underline">About Us</a>
+        <a href="#" class="block text-gray-700 hover:text-violet-700 hover:underline">Contact</a>
+        <a href="#" class="block text-gray-700 hover:text-violet-700 hover:underline">Help</a>
+        <a href="#" class="block text-gray-700 hover:text-violet-700 hover:underline">FAQ</a>
+      </nav>
+    </aside>
+  </div>
+</div>
