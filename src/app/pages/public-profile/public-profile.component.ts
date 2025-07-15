@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { UserSearch } from '../../models/user';
 import { UserService } from '../../services/user.service';
 import { firstValueFrom } from 'rxjs';
@@ -7,14 +7,16 @@ import { Interet } from '../../models/interet';
 import { EventService } from '../../services/event.service';
 import { EventSearch } from '../../models/event';
 import { EventCardComponent } from '../event-card/event-card.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-public-profile',
-  imports: [NgIf, NgFor, EventCardComponent],
+  imports: [NgIf, NgFor, EventCardComponent, RouterLink],
   templateUrl: './public-profile.component.html',
   styleUrl: './public-profile.component.css'
 })
-export class PublicProfileComponent {
+export class PublicProfileComponent implements OnInit{
+  // @ViewChild('interets') interets: ElementRef;
   userService: UserService = inject(UserService);
   eventService: EventService = inject(EventService);
   user: UserSearch = {} as UserSearch;
@@ -23,7 +25,7 @@ export class PublicProfileComponent {
   id = localStorage.getItem('userId');
   username = localStorage.getItem('name');
   email = localStorage.getItem('email');
-  interets: Interet[] = JSON.parse(localStorage.getItem('interets') || '[]');
+  interets: Interet[] = [];
   joinDate: string | null = null;
   isFavorite: boolean = false;
   isInterest: boolean = false;
@@ -32,10 +34,12 @@ export class PublicProfileComponent {
 
   ngOnInit() {
     this.load('user');
+    this.interets = JSON.parse(localStorage.getItem('interets') || '[]');
+    //window.location.reload();
+    
   }
 
   async load(data: string) {
-
     if (data == 'user') {
       const response = await firstValueFrom(this.userService.getUserById(this.id ?? '0'));
       this.user = response.data;

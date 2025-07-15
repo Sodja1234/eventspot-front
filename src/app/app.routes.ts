@@ -69,6 +69,11 @@ export const routes: Routes = [
     loadComponent: () => import('../app/pages/public-profile/public-profile.component').then((m) => m.PublicProfileComponent),
     children: []
   },
+  {
+    path: 'edit-profile',
+    title: 'Edit Profile - EventSpot',
+    loadComponent: () => import('../app/pages/edit-profile/edit-profile.component').then((m) => m.EditProfileComponent),
+  },
   //Organisation
   {
     path: 'dashboard',

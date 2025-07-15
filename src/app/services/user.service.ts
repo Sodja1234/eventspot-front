@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, firstValueFrom, Observable } from 'rxjs';
 import { Interet } from '../models/interet';
-import { UserSearch } from '../models/user';
+import { User, UserSearch } from '../models/user';
 import { Router } from '@angular/router';
 import { environment } from '../../environnement/environnement';
 
@@ -17,6 +17,7 @@ export class UserService {
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
   private token = "";
   private role = "";
+  private id = 0;
 
 
 
@@ -106,6 +107,14 @@ console.log('Token sauvegardé dans le localStorage :', localStorage.getItem('ac
 
   getUserById(id: string): Observable<{ data : UserSearch}> {
     return this.http.get<{data : UserSearch}>(`${this.apiUrl}/user/${id}`);
+  }
+
+  updateProfile(id:number, name?: string, interets?: number[]): Observable<any> {
+    const payload = { name, interets };
+    const token = this.getToken();
+    const headers = { Authorization: `Bearer ${token}` };
+
+    return this.http.post(`${this.apiUrl}/user/edit/${id}`, payload, {headers});
   }
 
   initializeSession(): void {
