@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { HttpClient } from '@angular/common/http';
 import { NgIf, CommonModule } from '@angular/common';
@@ -11,7 +11,7 @@ import { Interet } from '../../models/interet';
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  imports: [ReactiveFormsModule, NgIf, CommonModule]
+  imports: [ReactiveFormsModule, NgIf, CommonModule, RouterLink]
 })
 export class RegisterComponent {
   registerForm: FormGroup;
@@ -72,24 +72,23 @@ export class RegisterComponent {
     this.registerForm.get('interets')?.setValue([]);
   }
 
- toggleInterest(interestId: number) {
-  if (this.isInterestSelected(interestId)) {
-    this.selectedInterests = this.selectedInterests.filter(id => id !== interestId);
-  } else if (this.selectedInterests.length < 3) {
-    this.selectedInterests.push(interestId);
+  toggleInterest(interestId: number) {
+    if (this.isInterestSelected(interestId)) {
+      this.selectedInterests = this.selectedInterests.filter(id => id !== interestId);
+    } else if (this.selectedInterests.length < 3) {
+      this.selectedInterests.push(interestId);
+    }
+    this.registerForm.get('interets')?.setValue(this.selectedInterests);
   }
-  this.registerForm.get('interets')?.setValue(this.selectedInterests);
-}
 
   isInterestSelected(interestId: number): boolean {
-  return this.selectedInterests.includes(interestId);
-}
+    return this.selectedInterests.includes(interestId);
+  }
 
   private fetchAvailableInterests() {
     this.userService.getInterets().subscribe({
       next: (data) => {
         console.log('Centres d’intérêt disponibles:', data);
-        
         this.availableInterests = data;
       },
       error: (error) => {
@@ -121,7 +120,7 @@ export class RegisterComponent {
       if (formData.role !== 'organisateur') {
         delete formData.nom_organis;
       }
-       console.log('FormData envoyé au backend :', formData);
+      console.log('FormData envoyé au backend :', formData);
 
       await this.userService.registerUser(formData);
 
@@ -146,7 +145,6 @@ export class RegisterComponent {
   loginWithFacebook() {
     this.userService.socialLogin('facebook');
   }
-  
 }
 
 
@@ -176,14 +174,14 @@ export class RegisterComponent {
 //   isLoading = false;
 //   errorMessage: string | null = null;
 //   successMessage: string | null = null;
-  
+
 //   availableInterests: any[] = [];
 //   selectedInterests: any[] = [];
 
 
 //   // Liste des centres d'intérêt disponibles
 //   // availableInterests = [
-//   //   'Technologie', 'Musique', 'Art', 'Sport', 
+//   //   'Technologie', 'Musique', 'Art', 'Sport',
 //   //   'Voyage', 'Cuisine', 'Cinéma', 'Lecture',
 //   //   'Photographie', 'Mode', 'Nature', 'Jeux vidéo'
 //   // ];
@@ -286,14 +284,14 @@ export class RegisterComponent {
 //       this.isLoading = false;
 //     }
 //   }
-  
+
 
 //   loginWithGoogle() {
-//     this.userService.socialLogin('google'); 
+//     this.userService.socialLogin('google');
 //   }
 
 //   loginWithFacebook() {
-//     this.userService.socialLogin('facebook'); 
+//     this.userService.socialLogin('facebook');
 //   }
 // }
 
