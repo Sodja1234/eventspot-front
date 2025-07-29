@@ -23,9 +23,9 @@ export class AppComponent {
     this.router = router;
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)).subscribe(
-        (event:NavigationEnd) => {
-          const routesNoNavbar = ['/login', '/register'];
+        (event: NavigationEnd) => {
+          const routesNoNavbar = ['/login', '/login?verified=1', '/register'];
           this.asNavbar = !routesNoNavbar.includes(event.urlAfterRedirects);
-    });
+        });
   }
 }

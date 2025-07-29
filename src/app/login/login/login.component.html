@@ -1,66 +1,33 @@
-
-       <div class="bg-gray-50 min-h-screen font-sans">
+<div class="pt-30 min-h-screen font-sans">
   <div class="container mx-auto px-4">
     <div class="max-w-md mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
       <div class="p-8">
         <h2 class="text-2xl font-bold mb-6 text-center">Connectez-vous à votre compte</h2>
-        
         <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-    
-            <div class="mb-4">
-              <label for="login-email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-              <input 
-                type="email" 
-                id="login-email" 
-                formControlName="email"
-                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent">
-              <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-red-500 text-xs mt-1">
-                Veuillez entrer une adresse email valide
-              </div>
+          <div class="mb-4">
+            <label for="login-email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <input type="email" id="login-email" formControlName="email"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+            <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+              class="text-red-500 text-xs mt-1">
+              Veuillez entrer une adresse email valide
             </div>
-            
-            <div class="mb-6">
-              <label for="login-password" class="block text-sm font-medium text-gray-700 mb-1">Mot de passe</label>
-              <input 
-                type="password" 
-                id="login-password" 
-                formControlName="password"
-                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent">
-              <div class="flex justify-end mt-1">
-                <a routerLink="/forgot-password" class="text-sm text-purple-600 hover:text-purple-800">Mot de passe oublié ?</a>
-              </div>
-            </div>
-            
-            <button 
-              type="submit" 
-              [disabled]="isLoading"
-              class="w-full bg-purple-600 text-white py-2 rounded-lg font-semibold hover:bg-purple-700 transition mb-4 disabled:opacity-50">
-              <span *ngIf="!isLoading">Se connecter</span>
-              <span *ngIf="isLoading">Connexion en cours...</span>
-            </button>
-        </form>
-
-        <!-- Connexion sociale -->
-        <div class="text-center mb-4">
-          <p class="text-gray-500 mb-2">Ou connectez-vous avec</p>
-          <div class="flex justify-center gap-4">
-            <button 
-                (click)="loginWithGoogle()" 
-                type="button" 
-                class="flex items-center gap-2 bg-white border border-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition-all shadow-sm">
-                <img src="https://www.google.com/favicon.ico" alt="Google" class="h-5 w-5">
-                Google
-              </button>
-              <button 
-              (click)="loginWithFacebook()" 
-              type="button" 
-              class="flex items-center gap-2 bg-white border border-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition-all shadow-sm">
-              <img src="https://www.facebook.com/favicon.ico" alt="Facebook" class="h-5 w-5">
-              Facebook
-            </button>
           </div>
-        </div>
-
+          <div class="mb-6">
+            <label for="login-password" class="block text-sm font-medium text-gray-700 mb-1">Mot de passe</label>
+            <input type="password" id="login-password" formControlName="password"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent">
+            <div class="flex justify-end mt-1">
+              <a routerLink="/forgot-password" class="text-sm text-purple-600 hover:text-purple-800">Mot de passe oublié
+                ?</a>
+            </div>
+          </div>
+          <button type="submit" [disabled]="isLoading"
+            class="w-full bg-purple-600 text-white py-2 rounded-lg font-semibold hover:bg-purple-700 transition mb-4 disabled:opacity-50">
+            <span *ngIf="!isLoading">Se connecter</span>
+            <span *ngIf="isLoading">Connexion en cours...</span>
+          </button>
+        </form>
         <!-- Messages -->
         <div *ngIf="errorMessage" class="mb-4 p-3 bg-red-100 text-red-700 rounded-lg">
           {{ errorMessage }}
@@ -68,13 +35,17 @@
 
         <!-- Lien vers inscription -->
         <div class="text-center mt-4">
-          <p class="text-gray-600">Pas encore de compte ? 
-            <a routerLink="/register" class="text-purple-600 hover:text-purple-800 font-semibold">S'inscrire</a>
+          <p class="text-gray-600">Pas encore de compte ?
+            <a routerLink="/register" class="text-purple-600 hover:text-teal-500 font-semibold">S'inscrire</a>
           </p>
         </div>
       </div>
     </div>
   </div>
+  <div class="max-w-md mx-auto flex justify-center items-center mt-8">
+    <button [routerLink]="['/']"
+      class="bg-purple-600 p-2 text-white py-2 rounded-lg font-semibold hover:bg-teal-500 transition disabled:opacity-50">
+      Retourner à la page d'accueil
+    </button>
+  </div>
 </div>
-
-      

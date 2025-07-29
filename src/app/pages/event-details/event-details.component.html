@@ -1,7 +1,8 @@
 <div class="w-full mx-auto bg-gray-100 rounded-lg py-4">
   <div class="w-full ease-in-out flex flex-col py-3">
     <!-- Partie image : 80% -->
-    <img [src]="imageUrl" class="block w-full object-cover rounded-t-2xl h-120 " (error)="handleImageError($event)" alt="Image de l'événement" alt="img" />
+    <img [src]="imageUrl" class="block w-full object-cover rounded-t-2xl h-120 " (error)="handleImageError($event)"
+      alt="Image de l'événement" alt="img" />
     <!-- Partie texte : 20% avec background purple-600 -->
     <div class="uppercase rounded-b-4xl bg-purple-600 items-left my-auto justify-top px-5 py-10 w-full text-white
                     sm:px-10 md:px-20">
@@ -12,6 +13,7 @@
           <span class="bg-gray-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium m-2 uppercase tracking-widest"> {{category.title }} </span>
           }
         </span>
+        <app-favorite [id]="event.id" [color]="color"></app-favorite>
       </div>
       <!-- Nom de l'artiste -->
       <h1 class="text-4xl font-black w-[90%] text-black mb-5 ">{{ event.title }}</h1>
@@ -21,7 +23,8 @@
           <img class="size-10 rounded-full" [src]="imageUrl" (error)="handleImageError($event)" alt="Avatar">
         </div>
         <div class="ms-4">
-          <div class="text-lg font-semibold text-black uppercase tracking-widest mb-2"> {{ event.created_by.name }}</div>
+          <div class="text-lg font-semibold text-black uppercase tracking-widest mb-2"> {{ event.created_by.name }}
+          </div>
         </div>
       </div>
     </div>
@@ -31,16 +34,16 @@
       <!-- Ligne 1 : Ouverture des portes -->
       <div class="border-y border-black/30 py-4 flex flex-col gap-4 md:flex-row md:justify-between md:items-center">
         <span class="text-lg text-black/90">Début de l'événement</span>
-        <span class="font-bold text-lg text-black/90">{{ event.date_time_start }}</span>
+        <span class="font-bold text-lg text-black/90 px-5">{{ event.date_time_start }}</span>
       </div>
       <div class="border-b border-black/30 py-4 flex flex-col gap-4 md:flex-row md:justify-between md:items-center">
         <span class="text-lg text-black/90">Fin de l'événement</span>
-        <span class="font-bold text-lg text-black/90">{{ event.date_time_end }}</span>
+        <span class="font-bold text-lg text-black/90 px-5">{{ event.date_time_end }}</span>
       </div>
       <!-- Ligne 2 : Billets -->
-      <div class="border-b border-black/30 py-4 flex flex-col gap-4 lg:flex-row lg:justify-between lg:items-center">
+      <div class="border-b border-black/30 py-4 flex flex-col gap-4 lg:flex-row lg:justify-between lg:items-top">
         <span class="text-lg text-black/90">Description</span>
-        <div class="overflow-hidden">
+        <div class="w-[70%] overflow-hidden">
           <div class="ql-editor">
             <div [innerHTML]="descriptionHtml"></div>
           </div>
@@ -48,8 +51,8 @@
       </div>
       <!-- Ligne 3 : Organisateur -->
       <div class="border-b border-black/30  py-4 flex flex-col gap-4 md:flex-row md:justify-between md:items-center">
-        <span class="text-lg text-black/90">Organisateur</span>
-        <span class="font-bold text-lg text-black/90">Talent Boutique</span>
+        <span class="text-lg text-black/90">Lieu</span>
+        <span class="w-[70%] font-bold text-lg text-black/90">{{ event.address }}</span>
       </div>
     </div>
   </div>
@@ -80,41 +83,40 @@
     </div>
   </div>
 
-@if (userRole == "organisateur") {
+  @if (userRole == "organisateur") {
 
 
-<div class="bg-white rounded-lg shadow-md p-6 mt-6">
-  <h2 class="text-xl font-bold text-purple-600 mb-4">
-    Abonnés à l'événement : {{ eventName }}
-  </h2>
+  <div class="bg-white rounded-lg shadow-md p-6 mt-6">
+    <h2 class="text-xl font-bold text-purple-600 mb-4">
+      Abonnés à l'événement : {{ eventName }}
+    </h2>
 
-  <p class="text-sm text-gray-600 mb-4">
-    Nombre total : {{ totalAbonnes }} abonné(s)
-  </p>
+    <p class="text-sm text-gray-600 mb-4">
+      Nombre total : {{ totalAbonnes }} abonné(s)
+    </p>
 
-  <div *ngIf="subscribers.length > 0; else noAbonnes">
-    <ul class="divide-y divide-gray-200">
-      <li *ngFor="let abonne of subscribers" class="py-2">
-        <p class="text-base font-medium text-black">{{ abonne.name }}</p>
-        <p class="text-sm text-gray-500">{{ abonne.email }} — {{ abonne.created_at }}</p>
-      </li>
-    </ul>
+    <div *ngIf="subscribers.length > 0; else noAbonnes">
+      <ul class="divide-y divide-gray-200">
+        <li *ngFor="let abonne of subscribers" class="py-2">
+          <p class="text-base font-medium text-black">{{ abonne.name }}</p>
+          <p class="text-sm text-gray-500">{{ abonne.email }} — {{ abonne.created_at }}</p>
+        </li>
+      </ul>
+    </div>
+
+    <ng-template #noAbonnes>
+      <p class="text-gray-400 text-sm">Aucun abonné pour cet événement.</p>
+    </ng-template>
   </div>
 
-  <ng-template #noAbonnes>
-    <p class="text-gray-400 text-sm">Aucun abonné pour cet événement.</p>
-  </ng-template>
-</div>
-
-}@else {
+  }@else {
   <div class="dark:bg-gray-900 mx-auto pt-10">
     <div class="max-w-2x1 mx-auto text-center mb-5 lg:mb-5">
       <h1 class="text-5xl text-extrabold text-purple-600">Evenements récemment publiés</h1>
     </div>
-    <div class="grid grid-rows grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mx-auto gap-4 p-4">
-      <app-event-card [event]="event" *ngFor="let event of eventThrees" class="w-full mx-auto"></app-event-card>
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mx-auto gap-4 p-4 place-items-center justify-items-center">
+      <app-event-card [event]="event" *ngFor="let event of eventThrees"></app-event-card>
     </div>
   </div>
-}
+  }
 </div>
-
