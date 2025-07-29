@@ -42,6 +42,13 @@ export class EventService {
   }
 
   getLastEvents(count: number = 3, excludeId: number = 0): Observable<ResponseThree<EventSearch>> {
+    const token = this.userService.getToken();
+    if(token != null) {
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      })
+      return this.http.get<ResponseThree<EventSearch>>(`${this.apiUrl}/events/auth?latest=true&count=${count}&exclude=true&exclude_id=${excludeId}`, { headers });
+    }
     if (excludeId) {
       return this.http.get<ResponseThree<EventSearch>>(`${this.apiUrl}/events?latest=true&count=${count}&exclude=true&exclude_id=${excludeId}`);
     }
@@ -122,16 +129,15 @@ export class EventService {
 
     return this.http.get<{ data: Etat }>(`${this.apiUrl}/events/${eventId}/favorite`, { headers });
   }
-  addFavorite(eventId: number) {
+  addFavorite(eventId: number): Observable<{ data: Etat }> {
     const token = this.userService.getToken();
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
-
     const body = { eventId: eventId };
 
-    return this.http.post(`${this.apiUrl}/events/${eventId}/favorite`, body, { headers });
+    return this.http.post<{ data: Etat }>(`${this.apiUrl}/events/${eventId}/favorite`, body, { headers });
   }
   verifySubscribe(eventId: number): Observable<{ data: Etat }> {
     const token = this.userService.getToken();
@@ -139,16 +145,15 @@ export class EventService {
 
     return this.http.get<{ data: Etat }>(`${this.apiUrl}/events/${eventId}/subscribe`, { headers });
   }
-  addSubcribe(eventId: number) {
+  addSubscribe(eventId: number): Observable<{ data: Etat }> {
     const token = this.userService.getToken();
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
-
     const body = { eventId: eventId };
 
-    return this.http.post(`${this.apiUrl}/events/${eventId}/subscribe`, body, { headers });
+    return this.http.post<{ data: Etat }>(`${this.apiUrl}/events/${eventId}/subscribe`, body, { headers });
   }
 
   getEventByInterets(nom: string, count: number): Observable<Response<EventSearch>> {

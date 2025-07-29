@@ -34,4 +34,7 @@ export  interface EventSearch {
   date_time_end: String;
   tickets: Ticket[];
   media : Media;
+  address? : string;
+  favorite : string;
+  subscribe : string;
 }

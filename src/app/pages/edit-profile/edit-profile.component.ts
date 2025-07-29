@@ -8,11 +8,10 @@ import { Interet } from '../../models/interet';
 import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-edit-profile',
-  imports: [RouterLink, ReactiveFormsModule, NgFor],
+  imports: [RouterLink, ReactiveFormsModule],
   templateUrl: './edit-profile.component.html',
   styleUrl: './edit-profile.component.css'
 })
@@ -116,7 +115,7 @@ export class EditProfileComponent {
     //localStorage.setItem('interets', JSON.stringify(this.userUpdated.interests));
     //localStorage.setItem('interets', JSON.stringify(userData.interets));
 
-    
+
     this.router.navigate(['/profile']);
   }
 

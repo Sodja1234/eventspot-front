@@ -1,18 +1,17 @@
 import { UserService } from './../../../../../services/user.service';
 import { Component } from '@angular/core';
 import { CardBilletComponent } from "../card-billet/card-billet.component";
-import { TriBilletsComponent } from "../tri-billets/tri-billets.component";
 import { NgFor, NgIf } from '@angular/common';
 import { EventService } from '../../../../../services/event.service';
 
 @Component({
   selector: 'app-mes-billets',
-  imports: [CardBilletComponent, TriBilletsComponent,NgFor,NgIf],
+  imports: [CardBilletComponent,NgFor,NgIf],
   templateUrl: './mes-billets.component.html',
   styleUrl: './mes-billets.component.css'
 })
 export class MesBilletsComponent {
-  
+
 
    constructor(private eventService: EventService, private userService: UserService) {}
 
@@ -32,7 +31,7 @@ ngOnInit(): void {
 }
 
 
-  
+
 
 }
 
