@@ -1,5 +1,4 @@
-<div class="w-full justify-center p-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-  <div class="w-full p-4 rounded-b-lg shadow-lg flex flex-col justify-center items-center">
+ <div class="w-full p-4 rounded-b-lg shadow-lg flex flex-col justify-center items-center text-sm font-medium">
     <!-- Avatar -->
     <div class=" h-30 w-full flex justify-center items-center bg-purple-600">
       <svg class="w-40 h-40 mt-30 text-purple-600 bg-white rounded-full fill-teal-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -73,8 +72,8 @@
                 clip-rule="evenodd" />
             </svg>
           </button>
-          <div *ngIf="isFavorite" class="grid grid-rows grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mx-auto gap-4 p-4">
-            <app-event-card [event]="event" *ngFor="let event of eventFavorites" class="w-full mx-auto"></app-event-card>
+          <div *ngIf="isFavorite" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mx-auto gap-4 p-4 place-items-center justify-items-center">
+            <app-event-card [event]="event" *ngFor="let event of eventFavorites"></app-event-card>
           </div>
         </div>
         <div (click)="toogleInterets()" class="border-b pb-3">
@@ -93,11 +92,11 @@
                 clip-rule="evenodd" />
             </svg>
           </button>
-          <div *ngIf="isInterest" class="grid grid-rows grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mx-auto gap-4 p-4">
-            <app-event-card [event]="event" *ngFor="let event of eventInterets" class="w-full mx-auto"></app-event-card>
+          <div *ngIf="isInterest" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mx-auto gap-4 p-4 place-items-center justify-items-center">
+            <app-event-card [event]="event" *ngFor="let event of eventInterets"></app-event-card>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+

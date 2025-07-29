@@ -8,14 +8,12 @@
                     sm:px-10 md:px-20">
       <!-- Date et heure -->
       <div class="flex justify-start items-center">
-        <span
-          class="uppercase text-sm tracking-wide mb-5 lg:mb-10 py-2 flex flex-col gap-4 md:flex-row md:justify-between md:items-center">
+        <span class="uppercase text-sm tracking-wide mb-5 lg:mb-10 py-2 flex flex-col gap-4 md:flex-row md:justify-between md:items-center">
           @for(category of event.categories; track category.id){
-          <span
-            class="bg-gray-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium m-2 uppercase tracking-widest">
-            {{category.title }} </span>
+          <span class="bg-gray-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium m-2 uppercase tracking-widest"> {{category.title }} </span>
           }
         </span>
+        <app-favorite [id]="event.id" [color]="color"></app-favorite>
       </div>
       <!-- Nom de l'artiste -->
       <h1 class="text-4xl font-black w-[90%] text-black mb-5 ">{{ event.title }}</h1>
@@ -36,16 +34,16 @@
       <!-- Ligne 1 : Ouverture des portes -->
       <div class="border-y border-black/30 py-4 flex flex-col gap-4 md:flex-row md:justify-between md:items-center">
         <span class="text-lg text-black/90">Début de l'événement</span>
-        <span class="font-bold text-lg text-black/90">{{ event.date_time_start }}</span>
+        <span class="font-bold text-lg text-black/90 px-5">{{ event.date_time_start }}</span>
       </div>
       <div class="border-b border-black/30 py-4 flex flex-col gap-4 md:flex-row md:justify-between md:items-center">
         <span class="text-lg text-black/90">Fin de l'événement</span>
-        <span class="font-bold text-lg text-black/90">{{ event.date_time_end }}</span>
+        <span class="font-bold text-lg text-black/90 px-5">{{ event.date_time_end }}</span>
       </div>
       <!-- Ligne 2 : Billets -->
-      <div class="border-b border-black/30 py-4 flex flex-col gap-4 lg:flex-row lg:justify-between lg:items-center">
+      <div class="border-b border-black/30 py-4 flex flex-col gap-4 lg:flex-row lg:justify-between lg:items-top">
         <span class="text-lg text-black/90">Description</span>
-        <div class="overflow-hidden">
+        <div class="w-[70%] overflow-hidden">
           <div class="ql-editor">
             <div [innerHTML]="descriptionHtml"></div>
           </div>
@@ -53,8 +51,8 @@
       </div>
       <!-- Ligne 3 : Organisateur -->
       <div class="border-b border-black/30  py-4 flex flex-col gap-4 md:flex-row md:justify-between md:items-center">
-        <span class="text-lg text-black/90">Organisateur</span>
-        <span class="font-bold text-lg text-black/90">{{ event.created_by.name }}</span>
+        <span class="text-lg text-black/90">Lieu</span>
+        <span class="w-[70%] font-bold text-lg text-black/90">{{ event.address }}</span>
       </div>
     </div>
   </div>
@@ -116,8 +114,8 @@
     <div class="max-w-2x1 mx-auto text-center mb-5 lg:mb-5">
       <h1 class="text-5xl text-extrabold text-purple-600">Evenements récemment publiés</h1>
     </div>
-    <div class="grid grid-rows grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mx-auto gap-4 p-4">
-      <app-event-card [event]="event" *ngFor="let event of eventThrees" class="w-full mx-auto"></app-event-card>
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mx-auto gap-4 p-4 place-items-center justify-items-center">
+      <app-event-card [event]="event" *ngFor="let event of eventThrees"></app-event-card>
     </div>
   </div>
   }
