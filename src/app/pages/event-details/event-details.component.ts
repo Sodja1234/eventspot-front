@@ -10,11 +10,12 @@ import { NgFor, NgIf } from '@angular/common';
 import { UserService } from '../../services/user.service';
 import { environment } from '../../../environnement/environnement';
 import { ImageErrorService } from '../../services/image-error.service';
+import { FavoriteComponent } from '../favorite/favorite.component';
 
 @Component({
   selector: 'app-event-details',
   standalone: true,
-  imports: [EventCardComponent, QuillModule, NgFor, NgIf],
+  imports: [EventCardComponent, FavoriteComponent, QuillModule, NgFor, NgIf],
   templateUrl: './event-details.component.html',
   styleUrl: './event-details.component.css'
 })
@@ -32,6 +33,7 @@ export class EventDetailsComponent {
   userRole: string = '';
   baseUrl: string = environment.baseUrl;
   imageUrl: string = '';
+  color = 'text-white';
 
 
   constructor(private route: ActivatedRoute, private sanitizer: DomSanitizer) { }
