@@ -38,6 +38,13 @@ export class EventService {
 
 
   getEventById(id: number): Observable<{ data: EventSearch }> {
+    const token = this.userService.getToken();
+    if (token != null) {
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      })
+      return this.http.get<{ data: EventSearch }>(`${this.apiUrl}/events/auth/${id}`, { headers });
+    }
     return this.http.get<{ data: EventSearch }>(`${this.apiUrl}/events/${id}`);
   }
 
