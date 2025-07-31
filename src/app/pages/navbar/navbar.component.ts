@@ -16,6 +16,7 @@ export class NavbarComponent {
    asPublic: boolean = false;
    isLoggedIn: boolean = false;
   router: any;
+  roled = localStorage.getItem('role') ?? 'public' ;
 
 
 
@@ -44,5 +45,9 @@ export class NavbarComponent {
     this.authService.logout();
     this.isLoggedIn = false;
     //localStorage.removeItem('access_token');
+  }
+
+  showSideBar(){
+
   }
 }

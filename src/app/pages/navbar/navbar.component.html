@@ -1,14 +1,14 @@
 <nav
-  class="w-full shadow-md flex items-center justify-between sticky z-50 right-0 left-0 start-0 top-0 content-between py-3 px-10 bg-white border-gray-200 dark:bg-gray-900">
+  class="sticky top-0 left-0 right-0 z-50 flex items-center content-between justify-between w-full px-10 py-3 bg-white border-gray-200 shadow-md start-0 dark:bg-gray-900">
   <div class="w-1/3">
-    <a href="https://flowbite.com/" class="w-1/3 flex-1 items-center">
-      <span class="text-purple-600 text-lg font-bold">Event<span class="text-teal-500">Spot</span></span>
+    <a href="#" class="items-center flex-1 w-1/3">
+      <span class="text-lg font-bold text-purple-600">Event<span class="text-teal-500">Spot</span></span>
     </a>
   </div>
 
-  <div class="w-2/3 flex justify-end md:hidden">
-    <button id="menu-button"
-      class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+  <div class="flex justify-end w-2/3 md:hidden">
+    <button id="menu-button" (click)="showSideBar()"
+      class="inline-flex items-center justify-center w-10 h-10 p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
       aria-controls="navbar-search" aria-expanded="false">
       <span class="sr-only">Open main menu</span>
       <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
@@ -18,11 +18,11 @@
     </button>
   </div>
 
-  <div id="menu" class="w-2/3 flex justify-end hidden md:flex">
-    <div class="w-1/2 flex justify-center">
+  <div id="menu" class="flex justify-end hidden w-2/3 md:flex">
+    <div class="flex justify-center w-1/2">
       <div class="items-center justify-between w-full md:flex md:w-auto md:order-1" id="navbar-search">
         <div class="relative mt-3 md:hidden">
-          <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+          <div class="absolute inset-y-0 flex items-center pointer-events-none start-0 ps-3">
             <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
               fill="none" viewBox="0 0 20 20">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -30,62 +30,49 @@
             </svg>
           </div>
           <input type="text" id="search-navbar"
-            class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg ps-10 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Search...">
         </div>
         <ul
-          class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+          class="flex flex-col p-4 mt-4 font-medium border border-gray-100 rounded-lg md:p-0 bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
           <li>
             <a href="#"
-              class="block py-2 px-3 text-sm text-white bg-purple-600 rounded-sm md:bg-transparent md:text-purple-600 md:p-0 "
-              aria-current="page">Home</a>
+              class="block px-3 py-2 text-sm text-white bg-purple-600 rounded-sm md:bg-transparent md:text-purple-600 md:p-0 "
+              aria-current="page">Accueil</a>
           </li>
           <li>
             <a [routerLink]="['/events']"
-              class="block py-2 px-3 text-sm text-gray-900 dark:text-white rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-teal-500 md:p-0  dark:hover:text-teal-500 md:dark:hover:bg-transparent dark:border-gray-700">Events</a>
+              class="block px-3 py-2 text-sm text-gray-900 rounded-sm dark:text-white hover:bg-gray-100 md:hover:bg-transparent md:hover:text-teal-500 md:p-0 dark:hover:text-teal-500 md:dark:hover:bg-transparent dark:border-gray-700">Événements</a>
           </li>
           <li>
             <a [routerLink]="['/categories']"
-              class="block py-2 px-3 text-sm text-gray-900 dark:text-white rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-teal-500 md:p-0  dark:hover:text-teal-500 md:dark:hover:bg-transparent dark:border-gray-700">Categories</a>
-          </li>
-          <li>
-            <a href="#"
-              class="block py-2 px-3 text-sm text-gray-900 dark:text-white rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-teal-500 md:p-0  dark:hover:text-teal-500 md:dark:hover:bg-transparent dark:border-gray-700">About</a>
+              class="block px-3 py-2 text-sm text-gray-900 rounded-sm dark:text-white hover:bg-gray-100 md:hover:bg-transparent md:hover:text-teal-500 md:p-0 dark:hover:text-teal-500 md:dark:hover:bg-transparent dark:border-gray-700">Categories</a>
           </li>
         </ul>
       </div>
     </div>
-    <div class="w-1/2 flex justify-end items-center gap-2">
-      <a [routerLink]="['/search']" class="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+    <div class="flex items-center justify-end w-1/2 gap-2">
+      <a [routerLink]="['/search']" class="p-1 transition rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
         <svg class="w-5 h-5 text-gray-800 hover:text-teal-500 dark:text-white" aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
           <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
             d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
         </svg>
       </a>
-      <button (click)="toggleTheme()" class="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition"
-        aria-label="cvxc">
-        <svg *ngIf="isDarkTheme; else lightIco" class="w-5 h-5 hover:text-teal-500 text-gray-800 dark:text-white"
-          aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-          viewBox="0 0 24 24">
-          <path fill-rule="evenodd"
-            d="M13 3a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0V3ZM6.343 4.929A1 1 0 0 0 4.93 6.343l1.414 1.414a1 1 0 0 0 1.414-1.414L6.343 4.929Zm12.728 1.414a1 1 0 0 0-1.414-1.414l-1.414 1.414a1 1 0 0 0 1.414 1.414l1.414-1.414ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm-9 4a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H3Zm16 0a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2h-2ZM7.757 17.657a1 1 0 1 0-1.414-1.414l-1.414 1.414a1 1 0 1 0 1.414 1.414l1.414-1.414Zm9.9-1.414a1 1 0 0 0-1.414 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414ZM13 19a1 1 0 1 0-2 0v2a1 1 0 1 0 2 0v-2Z"
-            clip-rule="evenodd" />
-        </svg>
-        <ng-template #lightIco>
-          <svg class="w-5 h-5 text-gray-800 hover:text-teal-500 dark:text-white" aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-            <path fill-rule="evenodd"
-              d="M11.675 2.015a.998.998 0 0 0-.403.011C6.09 2.4 2 6.722 2 12c0 5.523 4.477 10 10 10 4.356 0 8.058-2.784 9.43-6.667a1 1 0 0 0-1.02-1.33c-.08.006-.105.005-.127.005h-.001l-.028-.002A5.227 5.227 0 0 0 20 14a8 8 0 0 1-8-8c0-.952.121-1.752.404-2.558a.996.996 0 0 0 .096-.428V3a1 1 0 0 0-.825-.985Z"
-              clip-rule="evenodd" />
-          </svg>
-        </ng-template>
-      </button>
       <a *ngIf="!isLoggedIn" [routerLink]="['/login']"
-        class="text-white font-bold-lg text-sm bg-purple-600 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg ml-2 px-2 py-1 text-center dark:bg-purple-600 dark:hover:bg-teal-600 dark:focus:ring-purple-600">
-        Get Started </a>
-      <a *ngIf="isLoggedIn" [routerLink]="['/profile']"
-        class="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 text-purple-600 hover:text-teal-500 transition flex justify-between">
+        class="px-2 py-1 ml-2 text-sm text-center text-white bg-purple-600 rounded-lg font-bold-lg hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-purple-600 dark:hover:bg-teal-600 dark:focus:ring-purple-600">
+        Démarrer </a>
+      <a *ngIf="isLoggedIn && role === 'public' " [routerLink]="['/profile']"
+        class="flex justify-between p-1 text-purple-600 transition rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-teal-500">
+        <strong class="text-sm">{{ userName }}</strong>
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+          viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+            d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13 16h-2a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 12 21Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+        </svg>
+      </a>
+      <a *ngIf="isLoggedIn && role === 'organisateur' " [routerLink]="['/dashboard']"
+        class="flex justify-between p-1 text-purple-600 transition rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-teal-500">
         <strong class="text-sm">{{ userName }}</strong>
         <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
           viewBox="0 0 24 24">
@@ -94,7 +81,7 @@
         </svg>
       </a>
       <button *ngIf="isLoggedIn" (click)="Logout()"
-        class="text-white font-bold-lg text-sm bg-purple-600 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg ml-2 px-2 py-1 text-center dark:bg-purple-600 dark:hover:bg-teal-600 dark:focus:ring-purple-600">
+        class="px-2 py-1 ml-2 text-sm text-center text-white bg-purple-600 rounded-lg font-bold-lg hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-purple-600 dark:hover:bg-teal-600 dark:focus:ring-purple-600">
         logout
       </button>
     </div>
