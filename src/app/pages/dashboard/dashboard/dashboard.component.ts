@@ -10,5 +10,5 @@ import { CardEveneemntComponent } from "../composants/evenement/card-eveneemnt/c
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
-
+  name = localStorage.getItem('name') ?? 'Cher organisateur' ;
 }
