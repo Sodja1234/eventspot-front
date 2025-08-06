@@ -57,10 +57,11 @@ export class CreateEventComponent implements AfterViewInit, OnDestroy {
 
       details: this.fb.group({
         description: ['', Validators.required],
-        url: [null, Validators.required] 
+        url: [null, Validators.required]
       }),
       ticket: this.fb.group({
         ticketTypes: [[]],
+        available: ['', Validators.required],
         date_time_start: ['', [Validators.required, this.futureDateValidator()]],
         date_time_end: ['', Validators.required],
       },
@@ -334,22 +335,23 @@ export class CreateEventComponent implements AfterViewInit, OnDestroy {
     }
 
     if (this.form.valid) {
-      const formData = new FormData(); 
-   
+      const formData = new FormData();
+
       formData.append('title', this.form.get('basicInfo.title')?.value ?? '');
       formData.append('description', this.form.get('details.description')?.value ?? '');
       formData.append('cycle', 'Annual');
-      formData.append('created_by', '1'); 
+      formData.append('created_by', '1');
       formData.append('date_time_start', this.form.get('ticket.date_time_start')?.value ?? '');
       formData.append('date_time_end', this.form.get('ticket.date_time_end')?.value ?? '');
       formData.append('address', this.form.get('basicInfo.location.address')?.value ?? '');
       formData.append('latitude', this.form.get('basicInfo.location.lat')?.value ?? '');
       formData.append('longitude', this.form.get('basicInfo.location.lng')?.value ?? '');
+      formData.append('available', this.form.get('ticket.available')?.value ?? '');
 
-      // Ajoute les category_ids 
+      // Ajoute les category_ids
       const categoryIds = this.getSelectedCategoryIds();
       categoryIds.forEach(id => {
-        formData.append('category_ids[]', id.toString()); 
+        formData.append('category_ids[]', id.toString());
       });
 
       // Ajoute le fichier si sélectionné
@@ -362,15 +364,15 @@ export class CreateEventComponent implements AfterViewInit, OnDestroy {
       }
 
 
-     
 
-      this.eventService.createEvent(formData).subscribe( 
+
+      this.eventService.createEvent(formData).subscribe(
         (response) => {
           console.log('Événement créé avec succès:', response);
           Swal.fire('Succès', 'Événement créé avec succès !', 'success');
-          this.form.reset(); 
-          this.selectedFile = null; 
-          this.step = 1; 
+          this.form.reset();
+          this.selectedFile = null;
+          this.step = 1;
         },
         (error) => {
           console.error("Erreur lors de la création:", error);

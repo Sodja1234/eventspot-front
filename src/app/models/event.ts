@@ -18,6 +18,7 @@ export interface Event {
   };
   tickets: {
     ticketTypes: string[];
+    available: number;
     date_time_start: Date;
     date_time_end: Date;
   };
